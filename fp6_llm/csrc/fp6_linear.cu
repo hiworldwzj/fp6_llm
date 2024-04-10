@@ -1,3 +1,6 @@
+#include <torch/extension.h>
+#include <ATen/ATen.h>
+
 #include "include/kernel_matmul.cuh"
 #include "include/kernel_reduction.cuh"
 #include "utils/weight_prepacking.h"
@@ -104,12 +107,6 @@ cudaError_t fp6_linear_kernel(cudaStream_t    stream,
 
 
 
-
-
-#ifndef NO_PYTORCH
-#include <torch/extension.h>
-#include <ATen/ATen.h>
-
 /*
 Computes FP6-FP16 GEMM (PyTorch interface).
 
@@ -215,4 +212,3 @@ torch::Tensor weight_matrix_dequant_cpu(torch::Tensor fp6_tensor, torch::Tensor 
     //
     return fp16_tensor;
 }
-#endif
